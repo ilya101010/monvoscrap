@@ -42,19 +42,3 @@ CREATE TABLE IF NOT EXISTS "uni_ugn" (
 	FOREIGN KEY("ugnid") REFERENCES "ugn"("ugnid"),
 	FOREIGN KEY("uid") REFERENCES "universities"("uid")
 );
-CREATE VIEW count (X) AS
-	WITH RECURSIVE
-	  cnt(x) AS (
-		 SELECT 1
-		 UNION ALL
-		 SELECT x+1 FROM cnt
-		  LIMIT 36000
-	  )
-	SELECT x FROM cnt
-/* count(X) */;
-CREATE VIEW studentsege (year, students, ege) AS
-	SELECT a.year as year, a.value as students, c.value as ege from data a
-	INNER JOIN data c ON (a.uid = c.uid AND a.year = c.year)
-	WHERE a.iid = 1 AND c.iid = 5 AND ege > 0
-	ORDER BY a.value
-/* studentsege(year,students,ege) */;
